@@ -1,0 +1,14 @@
+proc contents data= sasdata.cpi_data; run;
+DATA work.cpi;
+	SET sasdata.cpi_data;
+run;
+DATA work.cpi2;
+	SET work.cpi;
+	VALUE2 = VALUE*4;
+run;
+DATA work.cpi2;
+	SET work.cpi2;
+	VALUE3 = VALUE**3;
+	VALUE4 = VALUE/12;
+	VALUE5 = log(VALUE);
+run;
