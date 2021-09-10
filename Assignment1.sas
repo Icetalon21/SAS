@@ -32,3 +32,24 @@ DATA work.cpi3;
 run;		
 PROC CONTENTS data=work.cpi3;
 run;
+
+data Sasdata.Assignment1;
+	SET work.cpi3;
+run;
+data Sasdata.Assignment1;
+	SET Sasdata.Assignment1;
+	IF VALUE > 200 THEN delete;
+run;
+proc print data=Sasdata.Assignment1;
+	var DATE VALUE;
+	where VALUE < 13;
+run;
+proc means data=Sasdata.Assignment1 Mean Median Sum Min Max;
+	var VALUE;
+	where DATE BETWEEN mdy(01,01,1950) AND mdy(12,31,1959);
+data Sasdata.Assignment1;
+	SET Sasdata.Assignment1;
+	IF VALUE = 14 OR VALUE = 24.4 OR VALUE = 133.8 OR VALUE = 201.4 THEN COUNT = 1;
+	ELSE COUNT = 0;
+run;
+
